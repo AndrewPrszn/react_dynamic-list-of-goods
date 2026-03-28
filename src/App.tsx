@@ -11,46 +11,63 @@ export const App: React.FC = () => {
   const [goods, setGoods] = React.useState<Good[]>([]);
 
   return (
-    <div className="App">
-      <h1>Dynamic list of Goods</h1>
+    <>
+      <div className="App">
+        <h1>Dynamic list of Goods</h1>
 
-      <button
-        type="button"
-        data-cy="all-button"
-        onClick={async () => {
-          const data = await goodsAPI.getAll();
+        <button
+          type="button"
+          data-cy="all-button"
+          onClick={async () => {
+            try {
+              const data = await goodsAPI.getAll();
 
-          setGoods(data);
-        }}
-      >
-        Load all goods
-      </button>
+              setGoods(data);
+            } catch (error) {
+              // eslint-disable-next-line
+              console.error(error);
+            }
+          }}
+        >
+          Load all goods
+        </button>
 
-      <button
-        type="button"
-        data-cy="first-five-button"
-        onClick={async () => {
-          const data = await goodsAPI.get5First();
+        <button
+          type="button"
+          data-cy="first-five-button"
+          onClick={async () => {
+            try {
+              const data = await goodsAPI.get5First();
 
-          setGoods(data);
-        }}
-      >
-        Load 5 first goods
-      </button>
+              setGoods(data);
+            } catch (error) {
+              // eslint-disable-next-line
+              console.error(error);
+            }
+          }}
+        >
+          Load 5 first goods
+        </button>
 
-      <button
-        type="button"
-        data-cy="red-button"
-        onClick={async () => {
-          const data = await goodsAPI.getRedGoods();
+        <button
+          type="button"
+          data-cy="red-button"
+          onClick={async () => {
+            try {
+              const data = await goodsAPI.getRedGoods();
 
-          setGoods(data);
-        }}
-      >
-        Load red goods
-      </button>
+              setGoods(data);
+            } catch (error) {
+              // eslint-disable-next-line
+              console.error(error);
+            }
+          }}
+        >
+          Load red goods
+        </button>
 
-      <GoodsList goods={goods} />
-    </div>
+        <GoodsList goods={goods} />
+      </div>
+    </>
   );
 };
